@@ -16,10 +16,12 @@ function Header() {
     dispatch(showCurrencyDisplay());
   };
   return (
-    <Box as="header">
+    <Box as="header" w="full">
       <Container maxW="2xl">
         <Flex w="full" h="70px" align="center" justify="space-between">
-          <Text>CurEx</Text>
+          <Text fontFamily="Orbitron" fontWeight="extrabold">
+            CurEx
+          </Text>
           <Flex justify="space-between" w="120px">
             <NavLink to="">Home</NavLink>
             <NavLink to="settings">Settings</NavLink>

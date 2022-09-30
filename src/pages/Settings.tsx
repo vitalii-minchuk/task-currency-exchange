@@ -5,7 +5,7 @@ import {
   Flex,
   Radio,
   RadioGroup,
-  Stack,
+  Text,
 } from '@chakra-ui/react';
 import { ChangeEvent } from 'react';
 import availableCurrencies from '../constants';
@@ -28,40 +28,50 @@ function Settings() {
   };
   const handleAddRemoveCurrency = (e: ChangeEvent<HTMLInputElement>) => {
     const currency = e.currentTarget.value;
-    console.log(currency);
     dispatch(addRemoveCurrency(currency as Currency));
   };
   return (
-    <Box>
+    <Box my="50px">
       <Container maxW="2xl">
-        <RadioGroup margin="0 auto" w={{ base: '324px', md: '380px' }}>
-          <Flex direction="column" gap="9px" color="rgba(0, 0, 0, 0.87)">
-            {currencies.map((el) => (
-              <Radio
-                defaultChecked={el === baseCurrency}
-                onChange={handleChangeBaseRate}
+        <Flex direction="column" gap="30px">
+          <Flex
+            direction="column"
+            margin="0 auto"
+            w={{ base: '324px', md: '380px' }}
+          >
+            <Text mb="20px" fontWeight="bold">
+              Select available currencies
+            </Text>
+            {availableCurrencies.map((el) => (
+              <Checkbox
+                onChange={handleAddRemoveCurrency}
                 key={el}
-                variant="myRadio"
                 value={el}
+                defaultChecked={currencies.includes(el as Currency)}
+                isDisabled={el === 'uah' || el === 'usd'}
               >
-                {el}
-              </Radio>
+                {el.toUpperCase()}
+              </Checkbox>
             ))}
           </Flex>
-        </RadioGroup>
-        <Stack spacing={5} direction="row">
-          {availableCurrencies.map((el) => (
-            <Checkbox
-              onChange={handleAddRemoveCurrency}
-              key={el}
-              value={el}
-              defaultChecked={el === 'usd' || el === 'uah'}
-              isDisabled={el === 'uah' || el === 'usd'}
-            >
-              {el.toUpperCase()}
-            </Checkbox>
-          ))}
-        </Stack>
+          <RadioGroup margin="0 auto" w={{ base: '324px', md: '380px' }}>
+            <Flex direction="column" gap="10px">
+              <Text mb="20px" fontWeight="bold">
+                Select base currency
+              </Text>
+              {currencies.map((el) => (
+                <Radio
+                  defaultChecked={el === baseCurrency}
+                  onChange={handleChangeBaseRate}
+                  key={el}
+                  value={el}
+                >
+                  {el.toUpperCase()}
+                </Radio>
+              ))}
+            </Flex>
+          </RadioGroup>
+        </Flex>
       </Container>
     </Box>
   );

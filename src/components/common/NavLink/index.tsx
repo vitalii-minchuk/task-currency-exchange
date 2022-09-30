@@ -16,7 +16,7 @@ function NavLink({ children, to, ...props }: INavLink) {
 
   return (
     <Link to={to} {...props}>
-      <Text fontWeight={match ? 'bold' : 'normal'}>{children}</Text>
+      <Text color={match ? 'teal' : ''}>{children}</Text>
     </Link>
   );
 }

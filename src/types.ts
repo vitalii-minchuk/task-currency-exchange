@@ -3,6 +3,8 @@ export type ServerCurrencyRate = {
   uah: number;
   eur: number;
   pln: number;
+  czk: number;
+  chf: number;
 };
 
 export type ResponseData = {
@@ -10,6 +12,8 @@ export type ResponseData = {
   usd?: ServerCurrencyRate;
   eur?: ServerCurrencyRate;
   pln?: ServerCurrencyRate;
+  czk?: ServerCurrencyRate;
+  chf?: ServerCurrencyRate;
 };
 
 export type Currency = 'uah' | 'usd' | 'eur' | 'pln';

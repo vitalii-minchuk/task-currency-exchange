@@ -9,17 +9,8 @@ const activeLabelStyles = {
 };
 
 export default extendTheme({
-  breakpoints: {
-    lgX: '1170px',
-  },
-  colors: {
-    myColors: {
-      blue: '#00BDD3',
-      yellow: '#F4E041',
-    },
-  },
   fonts: {
-    body: "'Nunito', sans-serif",
+    body: ["'Nunito', sans-serif", "'Orbitron', sans-serif"],
   },
   styles: {
     global: () => ({

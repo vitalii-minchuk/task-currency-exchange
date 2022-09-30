@@ -1,8 +1,9 @@
-import { Box, Container, Flex } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import Marquee from 'react-fast-marquee';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchCurrency } from '../../store/Slices/currencySlice';
+import SingleRate from './SingleRate';
 
 function CurrencyDisplay() {
   const { isShown, currencies, baseCurrency, results } = useAppSelector(
@@ -13,31 +14,28 @@ function CurrencyDisplay() {
     currencies.map((el) => dispatch(fetchCurrency(el)));
   }, [currencies, dispatch]);
   return (
-    <Container maxW="2xl">
-      <Box>
-        {isShown ? (
-          <Marquee speed={20}>
-            <Flex>
-              {currencies
-                .filter((el) => el !== baseCurrency)
-                .map((el, i) => {
-                  const obj = results.find((item) => item[baseCurrency]);
-                  const rate = obj ? obj[baseCurrency][el] : i;
-                  return (
-                    <p key={rate}>
-                      1 {baseCurrency.toUpperCase()} = {rate.toFixed(2)}{' '}
-                      {el.toUpperCase()}
-                      <br />
-                    </p>
-                  );
-                })}
-            </Flex>
-          </Marquee>
-        ) : (
-          <Box />
-        )}
-      </Box>
-    </Container>
+    <Box bg="black" height="40px">
+      {isShown && (
+        <Marquee gradientWidth="15%" gradientColor={[15, 15, 15]} speed={120}>
+          <Flex align="center" height="40px" gap="30px">
+            {currencies
+              .filter((el) => el !== baseCurrency)
+              .map((el, i) => {
+                const obj = results.find((item) => item[baseCurrency]);
+                const rate = obj![baseCurrency]![el];
+                return (
+                  <SingleRate
+                    rate={rate}
+                    from={baseCurrency}
+                    to={el}
+                    key={rate}
+                  />
+                );
+              })}
+          </Flex>
+        </Marquee>
+      )}
+    </Box>
   );
 }
 
